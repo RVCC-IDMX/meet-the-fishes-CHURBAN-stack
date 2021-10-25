@@ -70,6 +70,7 @@
 
     //Using our button object let's create a "next" button.
     let nextButton = UI.Button(0,0,"Next >");
+    let nextButtonText = new PIXI.Text("Next >");
     
     //Let's place it in the bottom right-hand corner of the screen (regardless of size)
     nextButton.x = app.view.width  - nextButton.width;
@@ -79,7 +80,7 @@
     scene1.addChild(nextButton);
 
     //And let's add some text to tell us which scene we're on
-    let scene1Text = new PIXI.Text("Scene 1",{fill:0xFFFFFF});
+    let scene1Text = new PIXI.Text("Title Screen",{fill:0xFFFFFF});
 
     //And place it into the scene
     scene1.addChild(scene1Text);
@@ -91,7 +92,10 @@
     let scene2 = new PIXI.Container();
     
     let fishOne = PIXI.Sprite.from("img/fishOne.png"); 
-    scene2.addChild(fishOne);   
+    fishOne.scale.set(.25); 
+    fishOne.x = 250; 
+    fishOne.y = 100; 
+    scene2.addChild(fishOne);
     
     //Using our button object let's create a "next" button.
     let backButton = UI.Button(0,0,"< Back");
@@ -104,28 +108,23 @@
     scene2.addChild(backButton);
 
     //And let's also add some text to tell us which scene we're on
-    let scene2Text = new PIXI.Text("Scene 2",{fill:0xFFFFFF});
+    let scene2Text = new PIXI.Text("Fish One",{fill:0xFFFFFF});
 
     //And place it into the scene
     scene2.addChild(scene2Text);
-
+    let sampleText = new PIXI.Text('Hello my name is Dylan the colorful yellow/white fish!', { fill: 0xFFFFFF});
+    sampleText.x = 250; 
 
     //Now let's add the first scene to the stage
     app.stage.addChild(scene1);
+    scene2.addChild(sampleText);
+    sampleText.style.fontFamily = 'Monospace'; 
 
+    //Scene 2 Buttons 
+    let nextButtonTwo = UI.Button(440, 380, "Next >");
+    scene2.addChild(nextButtonTwo); 
 
-    /*
-
-        So now we have two scenes set up, and the first scene on stage.
-
-        The easiest, ugliest way to swap between scenes, would be to assign some code to each button to pull the current scene off the stage and replace it with another.
-
-    */
-
-    //
     // Swapping between scenes
-    //
-
     nextButton.onclick = () => {
         app.stage.removeChild(scene1);
         app.stage.addChild(scene2);
@@ -135,7 +134,53 @@
         app.stage.removeChild(scene2);
         app.stage.addChild(scene1);
     }
+    
+// Scene 3 structure
+let scene3 = new PIXI.Container();
 
+let fishTwo = PIXI.Sprite.from("img/fishTwo.png");
+        fishTwo.scale.set(.25); 
+        fishTwo.x = 250; 
+        fishTwo.y = 100; 
+        scene3.addChild(fishTwo);0
+
+        let backButton = UI.Button(0,0,"< Back");
+
+        scene3.addChild(backButton);
+
+        let scene3Text = new PIXI.Text("Fish One",{fill:0xFFFFFF});
+
+    scene3.addChild(scene3Text);
+    let sampleText3 = new PIXI.Text('I may look like a hockey puck but I am definetly a fish lmao my name is dylan nice to meet ya', { fill: 0xFFFFFF});
+    sampleText3.x = 250; 
+
+    app.stage.addChild(scene3);
+    scene3.addChild(sampleText3);
+    sampleText3.style.fontFamily = 'Monospace';
+
+    // Scene 4 structure
+let scene4 = new PIXI.Container();
+
+let fishThree = PIXI.Sprite.from("img/fishThree.png");
+        fishThree.scale.set(.25); 
+        fishThree.x = 250; 
+        fishThree.y = 100; 
+        scene4.addChild(fishTwo);0
+
+        let backButton = UI.Button(0,0,"< Back");
+
+        scene4.addChild(backButton);
+
+        let sceneText4 = new PIXI.Text("Fish Three",{fill:0xFFFFFF});
+
+        scene4.addChild(scene3Text);
+    let sampleText4 = new PIXI.Text('The name is Jimmy born and raised and here and I cant ever remmeber a moment when I wasnt in here', { fill: 0xFFFFFF});
+    sampleText3.x = 250; 
+
+    app.stage.addChild(scene4);
+    scene4.addChild(sampleText4);
+    sampleText4.style.fontFamily = 'Monospace';
+      
     /*
 
         Tada! We've implemented a crappy version of Powerpoint... *yay*
@@ -375,6 +420,7 @@
 
     Director.addScene("first",scene1);
     Director.addScene("second",scene2);
+    Director.addScene("third", scene3);
 
     nextButton.onclick = () => {
         Director.showScene("second");
@@ -383,6 +429,11 @@
     backButton.onclick = () => {
         Director.showScene("first");
     }
+    
+    backButtonThree.onclick = () => {
+        Director.showScene("third", {transition: Director.fade}); 
+    }
+    
 
     /*
         This week's homework!
@@ -408,7 +459,22 @@
 
     */
 
+    //Animations:
+    async function idleSwim() {
+        await Animate.to(fishOne, {
+        x: 250, y: 180,
+        duration: 2000,
+        easing: Animate.easeInOut
+        }); 
+        await Animate.to(fishOne, {
+        x: 250, y: 350,
+        duration: 2000, easing: Animate.easeInOut
+        })
+        idleSwim();
+    }
+    idleSwim();
+
 </script>
-    
+
 </body>
 </html>
