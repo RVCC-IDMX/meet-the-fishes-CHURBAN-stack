@@ -91,17 +91,25 @@
     let scene2 = new PIXI.Container();
     
     let fishOne = PIXI.Sprite.from("img/fishOne.png"); 
+    fishOne.scale.set(.25);
+    fishOne.x = 250; 
+    fishOne.y = 200; 
     scene2.addChild(fishOne);   
     
     //Using our button object let's create a "next" button.
     let backButton = UI.Button(0,0,"< Back");
+    let nextButton2 = UI.Button(0,0,"Next >");
     
     //Let's place it in the bottom left-hand corner of the screen (regardless of size)
     backButton.x = 0;
     backButton.y = app.view.height - backButton.height;
 
+    nextButton2.x = app.view.width  - nextButton2.width;
+    nextButton2.y = app.view.height - nextButton2.height;
+
     //And place it into the scene
     scene2.addChild(backButton);
+    scene2.addChild(nextButton2);
 
     //And let's also add some text to tell us which scene we're on
     let scene2Text = new PIXI.Text("Scene 2",{fill:0xFFFFFF});
@@ -113,6 +121,47 @@
     //Now let's add the first scene to the stage
     app.stage.addChild(scene1);
 
+    // Scene 3
+    let scene3 = new PIXI.Container();
+    let fishTwo = PIXI.Sprite.from("img/fishTwo.png"); 
+    fishTwo.scale.set(.25);
+    fishTwo.x = 250; 
+    fishTwo.y = 200; 
+    scene3.addChild(fishTwo);   
+    app.stage.addChild(scene3);
+
+    let nextButton3 = UI.Button(0,0,"Next >");
+
+    let backButton3 = UI.Button(0,0,"< Back");
+
+    backButton3.x = 0;
+    backButton3.y = app.view.height - backButton3.height;
+
+    nextButton3.x = app.view.width  - nextButton3.width;
+    nextButton3.y = app.view.height - nextButton3.height;
+
+    scene3.addChild(nextButton3);
+    scene3.addChild(backButton3);
+
+
+    //Scene 4: 
+    let fishThree = PIXI.Sprite.from("img/fishOne.png"); 
+    fishThree.scale.set(.25);
+    fishThree.x = 250; 
+    fishThree.y = 200; 
+    scene4.addChild(fishThree);   
+    app.stage.addChild(scene4); 
+
+
+let backButton4 = UI.Button(0,0,"< Back");
+
+backButton4.x = 0;
+backButton4.y = app.view.height - backButton4.height;
+
+let scene4Text = new PIXI.Text("Scene 4",{fill:0xFFFFFF});
+
+scene4.addChild(scene4Text);
+scene4.addChild(backButton4); 
 
     /*
 
@@ -135,7 +184,18 @@
         app.stage.removeChild(scene2);
         app.stage.addChild(scene1);
     }
-
+    nextButton2.onclick = () => {
+        Director.swipe(scene2, scene3);
+      };
+      nextButton3.onclick = () => {
+        Director.swipe(scene3, scene4);
+      };
+    backButton3.onclick = () => {
+        Director.swipe(scene3, scene2);
+      };
+      backButton4.onclick = () => {
+      Director.fade(scene4, scene3); 
+      }; 
     /*
 
         Tada! We've implemented a crappy version of Powerpoint... *yay*
@@ -383,6 +443,95 @@
     backButton.onclick = () => {
         Director.showScene("first");
     }
+
+
+//working
+        //animate fish1
+        async function idleSwim1() {
+            await Animate.to(fish1, {
+                x: 40, y: 50,
+                duration: 3000,
+                easing: Animate.easeInOut
+
+            });
+            fish1.rotation = 1.5;
+            await Animate.to(fish1, {
+                x: 25, y: -50,
+                duration: 3000,
+                easing: Animate.easeInOut
+            });
+            idleSwim1();
+            fish1.rotation = 0;
+        }
+        idleSwim1();
+
+        //working
+        //animate fish2
+        async function idleSwim2() {
+            await Animate.to(fish2, {
+                x: -50, y: 20,
+                duration: 4000,
+                easing: Animate.easeInOut
+            });
+            fish2.tint = (Math.floor(Math.random() * 0xFFFFFF));
+            await Animate.to(fish2, {
+                x: 50, y: 20,
+                duration: 4000,
+                easing: Animate.easeInOut
+            });
+            idleSwim2();
+        }
+        idleSwim2();
+
+        //working
+        fish2.interactive = true;
+        fish2.on('click', e => {
+            async function surface() {
+                await Animate.to(fish2, {
+                    x: 40, y: -70,
+                    duration: 2000,
+                    easing: Animate.easeInOut
+                });
+                await pause(1000);
+                surface();
+                idleSwim2();
+                fish2.rotation = 0;
+            };
+            surface();
+        })
+
+ // working
+ async function fish3Idle() {
+            await Animate.to(fish3, {
+                x: -50,
+                y: 10,
+                duration: 2000,
+                easing: Animate.easeInOut
+            })
+            await Animate.to(fish3, {
+                x: -50,
+                y: 30,
+                duration: 2000,
+                easing: Animate.easeInOut
+            })
+            fish3Idle();
+        }
+        fish3Idle();
+
+        //working
+        async function follow(e) {
+            await Animate.to(fish3, {
+                x: e.data.global.x - 350,
+                y: e.data.global.y - 250,
+                duration: 3000,
+                easing: Animate.easeInOut
+            });
+            follow();
+            fish3Idle();
+        }
+        follow();
+
+
 
     /*
         This week's homework!
