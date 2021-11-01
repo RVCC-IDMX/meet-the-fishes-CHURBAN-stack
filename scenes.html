@@ -43,8 +43,8 @@
       background.scale.set(0.35);
       background.x = -100;
       background.y = -100;
+      
       app.stage.addChild(background);
-
 
     /*
         Depending on the system or context, these can be called "scenes" "views" "pages" "panels" or all sorts of other things.
@@ -60,13 +60,13 @@
 
     //SCENE 1
     let scene1 = new PIXI.Container();
-    let titleGraphic = new PIXI.Graphics(); 
-    titleGraphic.beginFill(0xFFFFFF);
-    titleGraphic.drawRect(0,0,50,50);
-    titleGraphic.x = 250; 
-    titleGraphic.y = 250; 
 
-    scene1.addChild(titleGraphic);
+    let backgroundTitle = PIXI.Sprite.from("img/background_title.jpg");
+
+        backgroundTitle.width = 500;
+        backgroundTitle.height = 300;
+
+    scene1.addChild(backgroundTitle);
 
     //Using our button object let's create a "next" button.
     let nextButton = UI.Button(0,0,"Next >");
@@ -79,23 +79,33 @@
     scene1.addChild(nextButton);
 
     //And let's add some text to tell us which scene we're on
-    let scene1Text = new PIXI.Text("Scene 1",{fill:0xFFFFFF});
+    let scene1Text = new PIXI.Text("CHURBAN's Fish Tank",{fill:0xFFFFFF});
+
+        scene1Text.height = 70;
+        scene1Text.width = 250;
+        scene1Text.y = 180;
+        scene1Text.x = 200;
 
     //And place it into the scene
     scene1.addChild(scene1Text);
 
-    app.stage.addChild(scene1); 
-
 
     //SCENE 2
     let scene2 = new PIXI.Container();
-    
-    let fishOne = PIXI.Sprite.from("img/fishOne.png"); 
-    fishOne.scale.set(.25);
-    fishOne.x = 250; 
-    fishOne.y = 200; 
-    scene2.addChild(fishOne);   
-    
+
+    let backgroundOne = PIXI.Sprite.from("img/background1.jpg");
+
+        scene2.addChild(backgroundOne);
+
+    let fishOne = PIXI.Sprite.from("img/fishOne.png");
+            fishOne.width = 200;
+            fishOne.height = 200;
+            fishOne.y = 250;
+            fishOne.x = 300;
+            fishOne.anchor.set(.5);
+
+        scene2.addChild(fishOne);
+
     //Using our button object let's create a "next" button.
     let backButton = UI.Button(0,0,"< Back");
     let nextButton2 = UI.Button(0,0,"Next >");
@@ -115,54 +125,79 @@
     let scene2Text = new PIXI.Text("Scene 2",{fill:0xFFFFFF});
 
     //And place it into the scene
-    scene2.addChild(scene2Text);
+     let sampleText = new PIXI.Text('Sample', {fill: 0xffd700 });
+     sampleText.x = 250; 
 
+     scene2.addChild(scene2Text);
+     scene2.addChild(sampleText);
+   
 
     //Now let's add the first scene to the stage
     app.stage.addChild(scene1);
 
-    // Scene 3
+    //Scene 3
     let scene3 = new PIXI.Container();
-    let fishTwo = PIXI.Sprite.from("img/fishTwo.png"); 
-    fishTwo.scale.set(.25);
-    fishTwo.x = 250; 
-    fishTwo.y = 200; 
-    scene3.addChild(fishTwo);   
-    app.stage.addChild(scene3);
 
+    let fishTwo = PIXI.Sprite.from("img/fishTwo.png");
+        fishTwo.width = 50;
+        fishTwo.height = 50;
+        fishTwo.y = 250;
+        fishTwo.x = 300;
+        fishTwo.anchor.set(.35);
+
+    scene3.addChild(fishTwo);
+    
+     //Next button
     let nextButton3 = UI.Button(0,0,"Next >");
-
-    let backButton3 = UI.Button(0,0,"< Back");
-
-    backButton3.x = 0;
-    backButton3.y = app.view.height - backButton3.height;
 
     nextButton3.x = app.view.width  - nextButton3.width;
     nextButton3.y = app.view.height - nextButton3.height;
 
     scene3.addChild(nextButton3);
-    scene3.addChild(backButton3);
 
+    //Back Button
+    let backButton3 = UI.Button(0,0,"< Back");
 
-    //Scene 4: 
-    let fishThree = PIXI.Sprite.from("img/fishOne.png"); 
-    fishThree.scale.set(.25);
-    fishThree.x = 250; 
-    fishThree.y = 200; 
-    scene4.addChild(fishThree);   
-    app.stage.addChild(scene4); 
+    backButton3.x = 0;
+    backButton3.y = app.view.height - backButton3.height;
 
+    scene3.addChild(backButton3); 
 
-let backButton4 = UI.Button(0,0,"< Back");
+    let scene3Text = new PIXI.Text("Scene 3",{fill:0xFFFFFF});
+    
+    scene3.addChild(scene3Text); 
+    let sampleText2 = new PIXI.Text('Sample', {fill: 0xffd700 });
+     sampleText2.x = 250; 
 
-backButton4.x = 0;
-backButton4.y = app.view.height - backButton4.height;
+    scene3.addChild(sampleText2); 
+    
+    //Scene 4
+    let scene4 = new PIXI.Container();
 
-let scene4Text = new PIXI.Text("Scene 4",{fill:0xFFFFFF});
+    let fish3 = PIXI.Sprite.from("img/fishThree.png");
+        fish3.width = 200;
+        fish3.height = 100;
+        fish3.y = 250;
+        fish3.x = 300;
+        fish3.anchor.set(.5);
 
-scene4.addChild(scene4Text);
-scene4.addChild(backButton4); 
+        scene4.addChild(fish3);
 
+    //Back Button
+    let backButton4 = UI.Button(0,0,"< Back");
+
+    backButton4.x = 0;
+    backButton4.y = app.view.height - backButton4.height;
+
+    scene4.addChild(backButton4); 
+
+    let scene4Text = new PIXI.Text("Scene 4",{fill:0xFFFFFF});
+    
+    let sampleText3 = new PIXI.Text('Sample', {fill: 0xffd700 });
+     sampleText3.x = 250; 
+    
+     scene4.addChild(scene4Text);
+     scene4.addChild(sampleText3)
     /*
 
         So now we have two scenes set up, and the first scene on stage.
@@ -184,18 +219,7 @@ scene4.addChild(backButton4);
         app.stage.removeChild(scene2);
         app.stage.addChild(scene1);
     }
-    nextButton2.onclick = () => {
-        Director.swipe(scene2, scene3);
-      };
-      nextButton3.onclick = () => {
-        Director.swipe(scene3, scene4);
-      };
-    backButton3.onclick = () => {
-        Director.swipe(scene3, scene2);
-      };
-      backButton4.onclick = () => {
-      Director.fade(scene4, scene3); 
-      }; 
+
     /*
 
         Tada! We've implemented a crappy version of Powerpoint... *yay*
@@ -433,19 +457,40 @@ scene4.addChild(backButton4);
 
     */
 
-    Director.addScene("first",scene1);
-    Director.addScene("second",scene2);
+    Director.addScene("first", scene1);
+      Director.addScene("second", scene2);
+      Director.addScene("third", scene3);
+      Director.addScene("fourth", scene4);
 
-    nextButton.onclick = () => {
-        Director.showScene("second");
-    }
+      // First Scene
+      nextButton.onclick = () => {
+        Director.swipe(scene1, scene2);
+      };
 
-    backButton.onclick = () => {
-        Director.showScene("first");
-    }
+      // Second Scene
+      backButton.onclick = () => {
+        Director.fade(scene2, scene1);
+      };
 
+      nextButton2.onclick = () => {
+        Director.swipe(scene2, scene3);
+      };
 
-//working
+      // Third Scene
+      backButton3.onclick = () => {
+        Director.fade(scene3, scene2);
+      };
+
+      nextButton3.onclick = () => {
+        Director.swipe(scene3, scene4);
+      };
+
+      // Fourth Scene
+      backButton4.onclick = () => {
+        Director.fade(scene4, scene3);
+      };
+
+    //working
         //animate fish1
         async function idleSwim1() {
             await Animate.to(fishOne, {
@@ -454,14 +499,14 @@ scene4.addChild(backButton4);
                 easing: Animate.easeInOut
 
             });
-            fish1.rotation = 1.5;
+            fishOne.rotation = 1.5;
             await Animate.to(fishOne, {
                 x: 25, y: -50,
                 duration: 3000,
                 easing: Animate.easeInOut
             });
             idleSwim1();
-            fish1.rotation = 0;
+            fishOne.rotation = 0;
         }
         idleSwim1();
 
@@ -469,13 +514,13 @@ scene4.addChild(backButton4);
         //animate fish2
         async function idleSwim2() {
             await Animate.to(fishTwo, {
-                x: -50, y: 20,
+                x: -150, y: 200,
                 duration: 4000,
                 easing: Animate.easeInOut
             });
             fishTwo.tint = (Math.floor(Math.random() * 0xFFFFFF));
             await Animate.to(fishTwo, {
-                x: 50, y: 20,
+                x: 150, y: 200,
                 duration: 4000,
                 easing: Animate.easeInOut
             });
@@ -530,7 +575,7 @@ scene4.addChild(backButton4);
             fish3Idle();
         }
         follow();
-
+      
 
 
     /*
