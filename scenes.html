@@ -125,7 +125,7 @@
     let scene2Text = new PIXI.Text("Scene 2",{fill:0xFFFFFF});
 
     //And place it into the scene
-     let sampleText = new PIXI.Text('Sample', {fill: 0xffd700 });
+     let sampleText = new PIXI.Text('My name is Felicia\nand yeah I love\nto swim yaass', {fill: 0xff0000 });
      sampleText.x = 250; 
 
      scene2.addChild(scene2Text);
@@ -166,22 +166,23 @@
     let scene3Text = new PIXI.Text("Scene 3",{fill:0xFFFFFF});
     
     scene3.addChild(scene3Text); 
-    let sampleText2 = new PIXI.Text('Sample', {fill: 0xffd700 });
+    let sampleText2 = new PIXI.Text('Hello there my name \nis David the hockey\npuck fish and I\nchange colors on the fly', {fill: 0xff0000 });
      sampleText2.x = 250; 
+     
 
     scene3.addChild(sampleText2); 
     
     //Scene 4
     let scene4 = new PIXI.Container();
 
-    let fish3 = PIXI.Sprite.from("img/fishThree.png");
-        fish3.width = 200;
-        fish3.height = 100;
-        fish3.y = 250;
-        fish3.x = 300;
-        fish3.anchor.set(.5);
+    let fishThree = PIXI.Sprite.from("img/fishThree.gif");
+        fishThree.width = 200;
+        fishThree.height = 100;
+        fishThree.y = 250;
+        fishThree.x = 300;
+        fishThree.anchor.set(.5);
 
-        scene4.addChild(fish3);
+        scene4.addChild(fishThree);
 
     //Back Button
     let backButton4 = UI.Button(0,0,"< Back");
@@ -193,7 +194,7 @@
 
     let scene4Text = new PIXI.Text("Scene 4",{fill:0xFFFFFF});
     
-    let sampleText3 = new PIXI.Text('Sample', {fill: 0xffd700 });
+    let sampleText3 = new PIXI.Text('Hey my name is Bob\nand I sure do\nlove this tank!', {fill: 0xff0000 });
      sampleText3.x = 250; 
     
      scene4.addChild(scene4Text);
@@ -499,14 +500,14 @@
                 easing: Animate.easeInOut
 
             });
-            fishOne.rotation = 1.5;
+            fishOne.angle = 45;
             await Animate.to(fishOne, {
-                x: 25, y: -50,
+                x: 250, y: -50,
                 duration: 3000,
                 easing: Animate.easeInOut
             });
             idleSwim1();
-            fishOne.rotation = 0;
+            fishOne.angle = 0;
         }
         idleSwim1();
 
